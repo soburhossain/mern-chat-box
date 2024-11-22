@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { registerContext } from "./RegisterContext";
 
 export default function Form() {
-  const { formData, setFormData, message, handleSubmit } =
+  const { formData, setFormData, message, handleSubmit, isLoading } =
     useContext(registerContext);
   return (
     <form
@@ -36,6 +36,7 @@ export default function Form() {
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
+      {isLoading && <p className="text-center">Please wait...</p>}
       <button
         className="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 transition duration-300 ease-in-out transform hover:scale-110"
         type="submit"
@@ -44,7 +45,7 @@ export default function Form() {
       </button>
 
       {message && (
-        <p className="text-center text-xl font-semibold text-red-600 mt-4 opacity-80 transition-opacity duration-500">
+        <p className="text-center text-xl font-semibold text-red-600 mt-4 opacity-80 transition-opacity duration-500 ">
           {message}
         </p>
       )}

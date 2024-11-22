@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { loginContext } from "./LoginContext";
 
 export default function Form() {
-  const { handleSubmit, formData, setFormData, message } =
+  const { handleSubmit, formData, setFormData, message, isLoading } =
     useContext(loginContext);
   return (
     <form
@@ -27,6 +27,7 @@ export default function Form() {
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
+      {isLoading && <p className="text-center">Please wait...</p>}
       <button
         className="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 transition duration-300 ease-in-out transform hover:scale-110"
         type="submit"

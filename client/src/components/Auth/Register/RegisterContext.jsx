@@ -9,17 +9,21 @@ const RegisterProvider = ({ children }) => {
     email: "",
     password: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const res = await API.post("/register", formData);
       setMessage(res.data.message);
       navigate("/login");
     } catch (err) {
       console.log(err);
       setMessage(err.response?.data?.error || "Error registering user.");
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -30,6 +34,7 @@ const RegisterProvider = ({ children }) => {
         message,
         setMessage,
         handleSubmit,
+        isLoading,
       }}
     >
       {children}
