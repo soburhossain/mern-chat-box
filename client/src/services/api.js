@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: "https://chat-app-backend-1-u5q1.onrender.com/api",
 });
 
 // Add token to request headers if available

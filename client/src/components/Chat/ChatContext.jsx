@@ -15,7 +15,7 @@ const ChatProvider = ({ children }) => {
   // Establish socket connection and join room
   useEffect(() => {
     if (!socket) {
-      const newSocket = io("http://localhost:8000/api"); // Backend URL
+      const newSocket = io("https://chat-app-backend-1-u5q1.onrender.com/api"); // Backend URL
       const token = localStorage.getItem("token");
       newSocket.emit("join", token);
 

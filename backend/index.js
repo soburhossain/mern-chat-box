@@ -8,7 +8,6 @@ import { Server } from "socket.io";
 import http from "http";
 // Load environment variables
 dotenv.config();
-
 // Initialize the app
 const app = express();
 app.use(cors());
