@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
 import { registerContext } from "./RegisterContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
+  const navigate = useNavigate();
   const { formData, setFormData, message, handleSubmit, isLoading } =
     useContext(registerContext);
   return (
     <form
-      className="bg-white p-8 rounded-lg shadow-xl space-y-8 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500"
+      className="bg-gray-800 p-8 rounded-lg shadow-xl space-y-8 transform transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500"
       onSubmit={handleSubmit}
     >
       {/* Heading */}
@@ -37,18 +39,33 @@ export default function Form() {
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
       />
       {isLoading && <p className="text-center">Please wait...</p>}
+      {message && (
+        <p className="text-center text-xl font-semibold text-red-600 mt-4 opacity-80 transition-opacity duration-500 ">
+          {message}
+        </p>
+      )}
       <button
         className="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 transition duration-300 ease-in-out transform hover:scale-110"
         type="submit"
       >
         Register
       </button>
-
-      {message && (
-        <p className="text-center text-xl font-semibold text-red-600 mt-4 opacity-80 transition-opacity duration-500 ">
-          {message}
+      {/* Sign Up Section */}
+      <div className="text-center mt-4">
+        <p className="text-white">
+          Already have an account?{" "}
+          <button
+            type="button"
+            className="text-blue-600 hover:text-blue-800 font-semibold underline transition duration-300"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
         </p>
-      )}
+      </div>
     </form>
   );
 }

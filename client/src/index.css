@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* index.css */
+
+@keyframes alienMove {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-50px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes glowing {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.animate-glowing {
+  animation: glowing 1.5s infinite ease-in-out;
+}
+
+.animate-[alienMove_5s_infinite_ease-in-out] {
+  animation: alienMove 5s infinite ease-in-out;
+}

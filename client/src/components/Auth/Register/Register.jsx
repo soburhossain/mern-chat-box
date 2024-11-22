@@ -5,7 +5,7 @@ import BackGroundImage from "./BackGroundImage";
 
 const Register = () => {
   return (
-    <div className="relative w-full h-screen bg-gradient-to-r from-purple-600 to-blue-500">
+    <div className="relative w-full h-screen bg-gradient-to-r from-gray-800 to-blue-950">
       {/* Background with moving alien spacecrafts */}
       <BackGroundImage />
       {/* Semi-transparent overlay for better text contrast */}

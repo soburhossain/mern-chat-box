@@ -10,19 +10,12 @@ import { RegisterProvider } from "./components/Auth/Register/RegisterContext.jsx
 import { ChatProvider } from "./components/Chat/ChatContext.jsx";
 import { UserProvider } from "./components/User/UserContext.jsx";
 import { FriendProvider } from "./components/Friends/FriendContext.jsx";
-
+import HomePage from "./components/Home/Home.jsx";
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RegisterProvider>
-              <Register />
-            </RegisterProvider>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/register"
           element={

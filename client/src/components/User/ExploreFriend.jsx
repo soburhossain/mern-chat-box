@@ -11,7 +11,7 @@ export default function ExploreFriend() {
           e.preventDefault();
           navigate("/friends");
         }}
-        className="w-full py-3 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-bold rounded-lg hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 transition duration-300 ease-in-out transform hover:scale-110"
+        className="w-full py-3 bg-gradient-to-r from-blue-700 to-blue-900 text-white font-bold rounded-lg hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 transition duration-300 ease-in-out transform hover:scale-110"
       >
         Explore Friends
       </button>
