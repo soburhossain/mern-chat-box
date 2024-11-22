@@ -29,11 +29,11 @@ const HomePage = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            if (token) {
-              navigate("/profile");
-            }
             if (!token) {
               navigate("/login");
+            }
+            if (token) {
+              navigate("/profile");
             }
           }}
           className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-bounce"
