@@ -6,7 +6,7 @@ export default function SendButton() {
   return (
     <button
       onClick={handleSend}
-      className="p-4 bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-xl shadow-2xl hover:bg-gradient-to-l hover:scale-105 transition-all duration-500 ease-in-out"
+      className="p-3  bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-xl shadow-2xl hover:bg-gradient-to-l hover:scale-105 transition-all duration-500 ease-in-out"
     >
       Send
     </button>
