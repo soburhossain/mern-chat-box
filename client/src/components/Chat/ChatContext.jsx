@@ -2,7 +2,9 @@ import { createContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import API from "../../services/api";
+
 const chatContext = createContext();
+
 const ChatProvider = ({ children }) => {
   const location = useLocation();
   const selectedFriend = location.state;
@@ -12,13 +14,23 @@ const ChatProvider = ({ children }) => {
 
   // Establish socket connection and join room
   useEffect(() => {
-    const newSocket = io("https://chat-app-backend-1-u5q1.onrender.com"); // Backend URL
-    const token = localStorage.getItem("token");
-    newSocket.emit("join", token);
-    setSocket(newSocket);
+    if (!socket) {
+      const newSocket = io("http://localhost:8000/api"); // Backend URL
+      const token = localStorage.getItem("token");
+      newSocket.emit("join", token);
 
-    return () => newSocket.disconnect();
-  }, []);
+      // Join room for the selected friend
+      if (selectedFriend) {
+        newSocket.emit("joinRoom", selectedFriend._id);
+      }
+
+      setSocket(newSocket);
+
+      return () => {
+        newSocket.disconnect();
+      };
+    }
+  }, [socket, selectedFriend]);
 
   // Fetch messages when the friend is selected
   useEffect(() => {
@@ -37,9 +49,16 @@ const ChatProvider = ({ children }) => {
   // Listen for new messages from socket
   useEffect(() => {
     if (socket) {
-      socket.on("receiveMessage", (message) => {
+      const handleMessage = (message) => {
+        console.log("Message received from socket:", message); // Debugging log
         setMessages((prev) => [...prev, message]);
-      });
+      };
+
+      socket.on("receiveMessage", handleMessage);
+
+      return () => {
+        socket.off("receiveMessage", handleMessage);
+      };
     }
   }, [socket]);
 
@@ -58,6 +77,7 @@ const ChatProvider = ({ children }) => {
       console.error("Error sending message:", err);
     }
   };
+
   return (
     <chatContext.Provider
       value={{
@@ -74,4 +94,5 @@ const ChatProvider = ({ children }) => {
     </chatContext.Provider>
   );
 };
+
 export { chatContext, ChatProvider };

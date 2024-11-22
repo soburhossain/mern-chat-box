@@ -1,10 +1,8 @@
 import React from "react";
-
 import Header from "./Header";
 import Input from "./Input";
 import SendButton from "./SendButton";
 import Messages from "./Messages";
-
 const Chat = () => {
   return (
     <div className="flex flex-col h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 overflow-hidden">

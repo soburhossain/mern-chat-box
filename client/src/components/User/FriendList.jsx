@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { userContext } from "./UserContext";
-
 export default function FriendList() {
   const { user } = useContext(userContext);
   return (
@@ -11,7 +10,7 @@ export default function FriendList() {
           user.friends.map((friend) => (
             <li
               key={friend._id}
-              className="bg-gradient-to-r from-indigo-400 to-purple-500 text-white rounded-xl py-2 px-4 text-lg hover:scale-105 hover:shadow-lg transition-all duration-200"
+              className="bg-gradient-to-r from-indigo-400 to-purple-500 text-white rounded-xl py-2 px-4 text-lg hover:scale-105 hover:shadow-lg transition-all duration-200 cursor-pointer"
             >
               {friend.username}
             </li>

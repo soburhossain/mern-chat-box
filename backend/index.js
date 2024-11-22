@@ -1,10 +1,11 @@
-import express, { Router } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import cors from "cors";
-
+import { Server } from "socket.io";
+import http from "http";
 // Load environment variables
 dotenv.config();
 
@@ -152,11 +153,42 @@ router.post("/accept-friend-request", authenticateUser, async (req, res) => {
     res.status(500).json({ error: "Error accepting friend request" });
   }
 });
+// Create HTTP server
+const server = http.createServer(app);
+
+// Setup Socket.IO
+const io = new Server(server, {
+  cors: {
+    origin: "*", // Allow all origins (Update for production security)
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("New client connected");
+
+  // Join room
+  socket.on("join", (token) => {
+    console.log("User joined with token:", token);
+    // Optional: Validate and extract user ID from token, then join them to a specific room
+  });
+
+  // Receive and broadcast messages
+  socket.on("sendMessage", (message) => {
+    console.log("Message received:", message);
+    io.to(message.receiverId).emit("receiveMessage", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+  });
+});
+
 app.use("/api", router);
 // Port
 const PORT = process.env.PORT || 5000;
 
 // Start the server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
