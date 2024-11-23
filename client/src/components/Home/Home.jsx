@@ -26,20 +26,30 @@ const HomePage = () => {
           Connect with your friends and experience a futuristic world of
           seamless communication. Dive into the chat revolution!
         </p>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            if (!token) {
-              navigate("/login");
-            }
-            if (token) {
+        {token && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
               navigate("/profile");
-            }
-          }}
-          className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-bounce"
-        >
-          Go To Chat-App
-        </button>
+            }}
+            className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-bounce"
+          >
+            Go To Chat-App
+          </button>
+        )}
+        {!token && (
+          <p>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/login");
+              }}
+              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg md:text-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-bounce"
+            >
+              Login First
+            </button>
+          </p>
+        )}
       </div>
 
       {/* Subtle Background Overlay */}

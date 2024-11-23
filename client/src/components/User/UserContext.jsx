@@ -1,8 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import API from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 const userContext = createContext();
 const UserProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +16,7 @@ const UserProvider = ({ children }) => {
         setUser(res.data);
       } catch (err) {
         setError("Error fetching user info. Please try again later.");
-        console.error("Error fetching user info:", err);
+        navigate("/login");
       } finally {
         setLoading(false);
       }
